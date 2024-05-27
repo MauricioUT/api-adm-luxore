@@ -1,0 +1,65 @@
+2024-05-27 16:02:53.301  INFO 6465 --- [main] mx.luxore.AdmLuxoreApplication           : Starting AdmLuxoreApplication using Java 15.0.2 on MacBook-Pro-de-Mauricio.local with PID 6465 (/Users/mauricioutrilla/Documents/projects/LUXORE/admModule/api-adm-luxore/build/classes/java/main started by mauricioutrilla in /Users/mauricioutrilla/Documents/projects/LUXORE/admModule/api-adm-luxore)
+2024-05-27 16:02:53.304  INFO 6465 --- [main] mx.luxore.AdmLuxoreApplication           : The following 1 profile is active: "test"
+2024-05-27 16:02:54.368  INFO 6465 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-27 16:02:54.394  INFO 6465 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 0 JPA repository interfaces.
+2024-05-27 16:02:54.799  INFO 6465 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$2faf99b1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-05-27 16:02:54.851  INFO 6465 --- [main] .w.s.a.s.AnnotationActionEndpointMapping : Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2024-05-27 16:02:55.313  INFO 6465 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2024-05-27 16:02:55.321  INFO 6465 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-27 16:02:55.321  INFO 6465 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2024-05-27 16:02:55.435  INFO 6465 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-27 16:02:55.436  INFO 6465 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2053 ms
+2024-05-27 16:02:55.659  INFO 6465 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-27 16:02:55.693  INFO 6465 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-05-27 16:02:55.868  INFO 6465 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-05-27 16:02:55.946  INFO 6465 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-27 16:02:56.291  INFO 6465 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-27 16:02:56.308  INFO 6465 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-05-27 16:02:56.454  INFO 6465 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-05-27 16:02:56.462  INFO 6465 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-27 16:02:56.769  WARN 6465 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-27 16:02:56.968 DEBUG 6465 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-05-27 16:02:57.050 DEBUG 6465 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 2 mappings in 'requestMappingHandlerMapping'
+2024-05-27 16:02:57.089 DEBUG 6465 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-05-27 16:02:57.133 DEBUG 6465 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-05-27 16:02:57.528  INFO 6465 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2024-05-27 16:02:57.540  INFO 6465 --- [main] mx.luxore.AdmLuxoreApplication           : Started AdmLuxoreApplication in 4.816 seconds (JVM running for 5.268)
+2024-05-27 16:02:57.545  INFO 6465 --- [main] mx.luxore.AdmLuxoreApplication           : using environment: testing
+2024-05-27 16:02:57.546  INFO 6465 --- [main] mx.luxore.AdmLuxoreApplication           : name: luxore-prod
+2024-05-27 16:02:57.549  INFO 6465 --- [main] mx.luxore.AdmLuxoreApplication           : enabled:false
+2024-05-27 16:02:57.549  INFO 6465 --- [main] mx.luxore.AdmLuxoreApplication           : servers: [luxore.mx, localhost]
+2024-05-27 16:02:57.553  INFO 6465 --- [main] mx.luxore.AdmLuxoreApplication           : Db coneection: jdbc:mysql://localhost:3306/luxore
+2024-05-27 16:03:05.876  INFO 6465 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-05-27 16:03:05.883  INFO 6465 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-05-27 16:03:05.897  INFO 6465 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-05-27 18:31:23.266  INFO 10153 --- [main] mx.luxore.AdmLuxoreApplication           : Starting AdmLuxoreApplication using Java 15.0.2 on MacBook-Pro-de-Mauricio.local with PID 10153 (/Users/mauricioutrilla/Documents/projects/LUXORE/admModule/api-adm-luxore/build/classes/java/main started by mauricioutrilla in /Users/mauricioutrilla/Documents/projects/LUXORE/admModule/api-adm-luxore)
+2024-05-27 18:31:23.269  INFO 10153 --- [main] mx.luxore.AdmLuxoreApplication           : The following 1 profile is active: "test"
+2024-05-27 18:31:24.028  INFO 10153 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-27 18:31:24.043  INFO 10153 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JPA repository interfaces.
+2024-05-27 18:31:24.330  INFO 10153 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$de5c1e95] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-05-27 18:31:24.381  INFO 10153 --- [main] .w.s.a.s.AnnotationActionEndpointMapping : Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2024-05-27 18:31:24.664  INFO 10153 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2024-05-27 18:31:24.669  INFO 10153 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-27 18:31:24.669  INFO 10153 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.76]
+2024-05-27 18:31:24.784  INFO 10153 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-27 18:31:24.784  INFO 10153 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1431 ms
+2024-05-27 18:31:24.921  INFO 10153 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-27 18:31:24.947  INFO 10153 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2024-05-27 18:31:25.021  INFO 10153 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2024-05-27 18:31:25.059  INFO 10153 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-27 18:31:25.441  INFO 10153 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-27 18:31:25.449  INFO 10153 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2024-05-27 18:31:25.514  INFO 10153 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-05-27 18:31:25.518  INFO 10153 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-27 18:31:25.628  WARN 10153 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-27 18:31:25.746 DEBUG 10153 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-05-27 18:31:25.808 DEBUG 10153 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 2 mappings in 'requestMappingHandlerMapping'
+2024-05-27 18:31:25.823 DEBUG 10153 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-05-27 18:31:25.838 DEBUG 10153 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-05-27 18:31:25.937  INFO 10153 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2024-05-27 18:31:25.949  INFO 10153 --- [main] mx.luxore.AdmLuxoreApplication           : Started AdmLuxoreApplication in 3.111 seconds (JVM running for 3.757)
+2024-05-27 18:31:25.951  INFO 10153 --- [main] mx.luxore.AdmLuxoreApplication           : using environment: testing
+2024-05-27 18:31:25.951  INFO 10153 --- [main] mx.luxore.AdmLuxoreApplication           : name: luxore-prod
+2024-05-27 18:31:25.951  INFO 10153 --- [main] mx.luxore.AdmLuxoreApplication           : enabled:false
+2024-05-27 18:31:25.951  INFO 10153 --- [main] mx.luxore.AdmLuxoreApplication           : servers: [luxore.mx, localhost]
+2024-05-27 18:31:25.951  INFO 10153 --- [main] mx.luxore.AdmLuxoreApplication           : Db coneection: jdbc:mysql://localhost:3306/luxore
