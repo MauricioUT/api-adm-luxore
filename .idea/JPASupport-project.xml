@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoGeneratorSettingsState">
+    <option name="ignoredFields">
+      <set>
+        <option value="" />
+      </set>
+    </option>
     <option name="moduleName" value="api-adm-luxore.main" />
     <option name="moduleNameToSettings">
       <map>
         <entry key="api-adm-luxore.main">
           <value>
-            <ModuleSettings />
+            <ModuleSettings>
+              <option name="entityPackageName" value="mx.luxore.entity" />
+              <option name="repositoryPackageName" value="mx.luxore.repository" />
+            </ModuleSettings>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="DatabaseSettingsState">
-    <option name="language" value="es-MX" />
+    <option name="database" value="luxore" />
+    <option name="driverClass" value="com.mysql.cj.jdbc.Driver" />
+    <option name="driverPath" value="$PROJECT_DIR$/../../../../conectors/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar" />
+    <option name="url" value="jdbc:mysql://{host}:{port}/{database}?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
   </component>
 </project>

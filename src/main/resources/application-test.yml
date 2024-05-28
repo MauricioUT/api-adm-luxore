@@ -14,7 +14,7 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
-name: luxore-prod
+name: luxore-test
 environment: testing
 enabled: false
 servers:
