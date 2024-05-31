@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class CatalogsServiceImpl implements CatalogsService {
+public class CatalogsReadServiceImpl implements CatalogsService {
 
     @Autowired
     private CAmenityRepositoryWrapper amenityRepositoryWrapper;
@@ -47,7 +47,7 @@ public class CatalogsServiceImpl implements CatalogsService {
 
     @Override
     public ResponseEntity<?> getCatalogs(String catalog) {
-        ResponseEntity<?> responseEntity = null;
+        ResponseEntity<?> responseEntity;
         switch (catalog) {
             case CATEGORIES:
                 responseEntity = getCategories();

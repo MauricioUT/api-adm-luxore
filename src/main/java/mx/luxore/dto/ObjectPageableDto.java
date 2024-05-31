@@ -16,6 +16,6 @@ import java.util.List;
 public class ObjectPageableDto implements Serializable {
     @Serial
     private static final long serialVersionUID = 4503830363218388492L;
-    private long size;
+    private long total;
     private List<?> list;
 }
