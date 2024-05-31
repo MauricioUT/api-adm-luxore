@@ -96,7 +96,7 @@ public class CatalogsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")  })
-    @PostMapping(value = "/updateAmenity", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/updateAmenity", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateAmenity(@RequestBody CatalogDto amenity) {
         return catalogsService.updateAmenity(amenity);
     }
@@ -105,7 +105,7 @@ public class CatalogsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")  })
-    @PostMapping(value = "/updatePropertyType", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/updatePropertyType", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updatePropertyType(@RequestBody CatalogDto property) {
         return catalogsService.updatePropertyType(property);
     }
@@ -114,7 +114,7 @@ public class CatalogsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")  })
-    @PostMapping(value = "/updateCity", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/updateCity", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateCity(@RequestBody CityDto cityDto) {
         return catalogsService.updateCity(cityDto);
     }
@@ -123,7 +123,7 @@ public class CatalogsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")  })
-    @PostMapping(value = "/updateColony", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/updateColony", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateColony(@RequestBody ColonyDto colonyDto) {
         return catalogsService.updateColony(colonyDto);
     }
