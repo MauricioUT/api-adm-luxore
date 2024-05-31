@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 public interface CatalogsService {
 
     ResponseEntity<?> getCatalogs(String catalog);
+    ResponseEntity<?> getCityPageable(CityDto state);
+    ResponseEntity<?> getColonyPageable(ColonyDto city);
+    ResponseEntity<?> getAmenityPageable(CatalogDto page);
 
     ResponseEntity<?> addAmenity(CatalogDto amenity);
     ResponseEntity<?> addCity(CityDto city);

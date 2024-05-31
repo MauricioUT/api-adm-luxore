@@ -29,6 +29,33 @@ public class CatalogsController {
         return catalogsService.getCatalogs(catalog);
     }
 
+    @Operation(summary = "get Amenities")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Server Error")  })
+    @PostMapping(value = "/amenities", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAmenitiesPageable(@RequestBody CatalogDto pageable) {
+        return catalogsService.getAmenityPageable(pageable);
+    }
+
+    @Operation(summary = "get city by state")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Server Error")  })
+    @PostMapping(value = "/cities", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getCitiesByState(@RequestBody CityDto state) {
+        return catalogsService.getCityPageable(state);
+    }
+
+    @Operation(summary = "get colonies by city")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Server Error")  })
+    @PostMapping(value = "/colonies", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getColonyPageable(@RequestBody ColonyDto city) {
+        return catalogsService.getColonyPageable(city);
+    }
+
     @Operation(summary = "add amenity")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),

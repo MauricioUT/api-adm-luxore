@@ -7,16 +7,15 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
-public class ColonyDto extends CatalogDto implements Serializable {
-
+@Setter
+public class ObjectPageableDto implements Serializable {
     @Serial
-    private static final long serialVersionUID = 4711647709622821400L;
-    private int idCity;
-    private String postalCode;
-
+    private static final long serialVersionUID = 4503830363218388492L;
+    private long size;
+    private List<?> list;
 }

@@ -3,6 +3,8 @@ package mx.luxore.repositorywrapper;
 import mx.luxore.entity.CAmenity;
 import mx.luxore.repository.CAmenityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +16,12 @@ public class CAmenityRepositoryWrapper {
     @Autowired
     private CAmenityRepository repository;
 
-    public List<CAmenity> findAll() {
-        return repository.findAll();
+    public Page<CAmenity> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
-    public Optional<CAmenity> findById(int id) {
-        return repository.findById(id);
+    public long countAll() {
+        return repository.count();
     }
 
     public Integer save(CAmenity amenity) {
