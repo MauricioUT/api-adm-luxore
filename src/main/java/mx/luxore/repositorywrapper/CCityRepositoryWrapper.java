@@ -33,8 +33,4 @@ public class CCityRepositoryWrapper {
         return city.getId();
     }
 
-    public Integer update(CCity city) {
-        this.repository.saveAndFlush(city);
-        return city.getId();
-    }
 }

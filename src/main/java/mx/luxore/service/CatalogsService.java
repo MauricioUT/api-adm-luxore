@@ -16,4 +16,10 @@ public interface CatalogsService {
     ResponseEntity<?> addCity(CityDto city);
     ResponseEntity<?> addColony(ColonyDto colony);
     ResponseEntity<?> addPropertyType(CatalogDto property);
+
+
+    ResponseEntity<?> updateAmenity(CatalogDto amenity);
+    ResponseEntity<?> updateCity(CityDto city);
+    ResponseEntity<?> updateColony(ColonyDto colony);
+    ResponseEntity<?> updatePropertyType(CatalogDto property);
 }

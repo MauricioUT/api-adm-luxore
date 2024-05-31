@@ -27,8 +27,4 @@ public class TAmenitiesPropertyRepositoryWrapper {
         return amenitiesProperty.getId();
     }
 
-    public Integer update(TAmenitiesProperty amenitiesProperty) {
-        this.repository.saveAndFlush(amenitiesProperty);
-        return amenitiesProperty.getId();
-    }
 }

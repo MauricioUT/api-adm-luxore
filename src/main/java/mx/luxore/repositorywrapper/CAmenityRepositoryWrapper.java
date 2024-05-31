@@ -20,16 +20,19 @@ public class CAmenityRepositoryWrapper {
         return repository.findAll(pageable);
     }
 
+    public List<CAmenity> findAll() {
+        return repository.findAll();
+    }
+
     public long countAll() {
         return repository.count();
     }
 
-    public Integer save(CAmenity amenity) {
-        this.repository.saveAndFlush(amenity);
-        return amenity.getId();
+    public Optional<CAmenity> findById(int id) {
+        return repository.findById(id);
     }
 
-    public Integer update(CAmenity amenity) {
+    public Integer save(CAmenity amenity) {
         this.repository.saveAndFlush(amenity);
         return amenity.getId();
     }

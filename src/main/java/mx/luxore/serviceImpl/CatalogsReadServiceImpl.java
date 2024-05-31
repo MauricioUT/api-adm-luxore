@@ -43,6 +43,8 @@ public class CatalogsReadServiceImpl implements CatalogsService {
     private static final String CATEGORIES = "categories";
     private static final String STATES = "states";
     private static final String PROPERTY_TYPE = "property";
+    private static final String AMENITIES = "amenities";
+
 
 
     @Override
@@ -50,7 +52,8 @@ public class CatalogsReadServiceImpl implements CatalogsService {
         ResponseEntity<?> responseEntity = switch (catalog) {
             case CATEGORIES -> getCategories();
             case STATES -> getStates();
-            case PROPERTY_TYPE -> getPrpertyType();
+            case PROPERTY_TYPE -> getPropertyType();
+            case AMENITIES -> getAmenities();
             default -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         };
 
@@ -69,7 +72,7 @@ public class CatalogsReadServiceImpl implements CatalogsService {
             cat.setDescription(a.getCity());
             return cat;
         }).collect(Collectors.toList());
-        long size = colonyRepositoryWrapper.sizeColonyByCity(state.getIdState());
+        long size = cityRepositoryWrapper.sizeColonyByState(state.getIdState());
         return new ResponseEntity<>(new ObjectPageableDto(size, catalog), HttpStatus.OK);
     }
 
@@ -152,6 +155,67 @@ public class CatalogsReadServiceImpl implements CatalogsService {
 
     }
 
+    @Override
+    public ResponseEntity<?> updateAmenity(CatalogDto amenity) {
+        Optional<CAmenity> am = amenityRepositoryWrapper.findById(amenity.getId());
+        if (am.isEmpty()) {
+            throw new ResourceNotFoundException("Amenidad", " ", " ",
+                new Throwable("updateAmenity()"), this.getClass().getName());
+        }
+        am.get().setAmenity(amenity.getDescription());
+        amenityRepositoryWrapper.save(am.get());
+        return new ResponseEntity<>(new DefaultMessage(am.get().getId().toString(), 200), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> updateCity(CityDto city) {
+        Optional<CCity> ci = cityRepositoryWrapper.findById(city.getId());
+        if (ci.isEmpty()) {
+            throw new ResourceNotFoundException("Ciudad", " ", " ",
+                    new Throwable("updateCity()"), this.getClass().getName());
+        }
+        Optional<CState> state = stateRepositoryWrapper.findById(city.getIdState());
+        if (state.isEmpty()) {
+            throw new ResourceNotFoundException("Estado", " ", " ",
+                    new Throwable("updateCity()"), this.getClass().getName());
+        }
+        ci.get().setCity(city.getDescription());
+        ci.get().setIdState(state.get());
+        cityRepositoryWrapper.save(ci.get());
+        return new ResponseEntity<>(new DefaultMessage(ci.get().getId().toString(), 200), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> updateColony(ColonyDto colony) {
+        Optional<CColony> col = colonyRepositoryWrapper.findById(colony.getId());
+        if (col.isEmpty()) {
+            throw new ResourceNotFoundException("Colonia", " ", " ",
+                    new Throwable("updateColony()"), this.getClass().getName());
+        }
+        Optional<CCity> city = cityRepositoryWrapper.findById(colony.getIdCity());
+        if (city.isEmpty()) {
+            throw new ResourceNotFoundException("Ciudad", " ", " ",
+                    new Throwable("updateColony()"), this.getClass().getName());
+        }
+        col.get().setIdCity(city.get());
+        col.get().setColony(colony.getDescription());
+        col.get().setPostalCode(colony.getPostalCode());
+        colonyRepositoryWrapper.save(col.get());
+        return new ResponseEntity<>(new DefaultMessage(col.get().getId().toString(), 200), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> updatePropertyType(CatalogDto property) {
+        Optional<CPropertyType> pt = propertyTypeRepositoryWrapper.findById(property.getId());
+        if (pt.isEmpty()) {
+            throw new ResourceNotFoundException("Tipo de propiedad", " ", " ",
+                    new Throwable("updatePropertyType()"), this.getClass().getName());
+        }
+        pt.get().setPropertyType(property.getDescription());
+        propertyTypeRepositoryWrapper.save(pt.get());
+        return new ResponseEntity<>(new DefaultMessage(pt.get().getId().toString(), 200), HttpStatus.OK);
+    }
+
     public ResponseEntity<?> getCategories() {
         List<CCategory> categories = categoryRepositoryWrapper.findAll();
         if (categories.isEmpty())
@@ -178,7 +242,7 @@ public class CatalogsReadServiceImpl implements CatalogsService {
         return new ResponseEntity<>(catalog, HttpStatus.OK);
     }
 
-    private ResponseEntity<?> getPrpertyType() {
+    private ResponseEntity<?> getPropertyType() {
         List<CPropertyType> propertyTypes = propertyTypeRepositoryWrapper.findAll();
         if (propertyTypes.isEmpty())
             throw new ResourceNotFoundException("Tipo de propiedad", " ", " ", new Throwable("getPrpertyType()"), this.getClass().getName());
@@ -186,6 +250,19 @@ public class CatalogsReadServiceImpl implements CatalogsService {
             CatalogDto cat = new CatalogDto();
             cat.setId(a.getId());
             cat.setDescription(a.getPropertyType());
+            return cat;
+        }).collect(Collectors.toList());
+        return new ResponseEntity<>(catalog, HttpStatus.OK);
+    }
+
+    private ResponseEntity<?> getAmenities() {
+        List<CAmenity> amenities = amenityRepositoryWrapper.findAll();
+        if (amenities.isEmpty())
+            throw new ResourceNotFoundException("amenidades", " ", " ", new Throwable("getAmenities()"), this.getClass().getName());
+        List<CatalogDto> catalog = amenities.stream().map(a -> {
+            CatalogDto cat = new CatalogDto();
+            cat.setId(a.getId());
+            cat.setDescription(a.getAmenity());
             return cat;
         }).collect(Collectors.toList());
         return new ResponseEntity<>(catalog, HttpStatus.OK);

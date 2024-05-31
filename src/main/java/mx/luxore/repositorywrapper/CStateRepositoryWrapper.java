@@ -21,14 +21,4 @@ public class CStateRepositoryWrapper {
     public Optional<CState> findById(int id) {
         return repository.findById(id);
     }
-
-    public Integer save(CState state) {
-        this.repository.saveAndFlush(state);
-        return state.getId();
-    }
-
-    public Integer update(CState state) {
-        this.repository.saveAndFlush(state);
-        return state.getId();
-    }
 }

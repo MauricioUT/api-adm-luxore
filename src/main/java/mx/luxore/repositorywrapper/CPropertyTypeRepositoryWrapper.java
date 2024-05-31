@@ -27,8 +27,4 @@ public class CPropertyTypeRepositoryWrapper {
         return propertyType.getId();
     }
 
-    public Integer update(CPropertyType propertyType) {
-        this.repository.saveAndFlush(propertyType);
-        return propertyType.getId();
-    }
 }

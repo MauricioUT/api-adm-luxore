@@ -27,8 +27,4 @@ public class TImageRepositoryWrapper {
         return image.getId();
     }
 
-    public Integer update(TImage image) {
-        this.repository.saveAndFlush(image);
-        return image.getId();
-    }
 }

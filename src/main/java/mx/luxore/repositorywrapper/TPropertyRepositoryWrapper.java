@@ -26,9 +26,4 @@ public class TPropertyRepositoryWrapper {
         this.repository.saveAndFlush(property);
         return property.getId();
     }
-
-    public Integer update(TProperty property) {
-        this.repository.saveAndFlush(property);
-        return property.getId();
-    }
 }

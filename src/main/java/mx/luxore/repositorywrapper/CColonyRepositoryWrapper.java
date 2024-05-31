@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CColonyRepositoryWrapper {
@@ -19,6 +20,10 @@ public class CColonyRepositoryWrapper {
         return repository.findByIdCity_Id(idCity, pageable);
     }
 
+    public Optional<CColony> findById(int id) {
+        return repository.findById(id);
+    }
+
     public long sizeColonyByCity(int idCity) {
         return repository.countByIdCity_Id(idCity);
     }
@@ -28,8 +33,4 @@ public class CColonyRepositoryWrapper {
         return colony.getId();
     }
 
-    public Integer update(CColony colony) {
-        this.repository.saveAndFlush(colony);
-        return colony.getId();
-    }
 }

@@ -18,17 +18,4 @@ public class CCategoryRepositoryWrapper {
         return repository.findAll();
     }
 
-    public Optional<CCategory> findById(int id) {
-        return repository.findById(id);
-    }
-
-    public Integer save(CCategory category) {
-        this.repository.saveAndFlush(category);
-        return category.getId();
-    }
-
-    public Integer update(CCategory category) {
-        this.repository.saveAndFlush(category);
-        return category.getId();
-    }
 }
