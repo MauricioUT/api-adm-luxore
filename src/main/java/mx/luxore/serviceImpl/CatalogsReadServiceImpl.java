@@ -47,21 +47,12 @@ public class CatalogsReadServiceImpl implements CatalogsService {
 
     @Override
     public ResponseEntity<?> getCatalogs(String catalog) {
-        ResponseEntity<?> responseEntity;
-        switch (catalog) {
-            case CATEGORIES:
-                responseEntity = getCategories();
-                break;
-            case STATES:
-                responseEntity = getStates();
-                break;
-            case PROPERTY_TYPE:
-                responseEntity = getPrpertyType();
-                break;
-            default:
-                responseEntity = new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-                break;
-        }
+        ResponseEntity<?> responseEntity = switch (catalog) {
+            case CATEGORIES -> getCategories();
+            case STATES -> getStates();
+            case PROPERTY_TYPE -> getPrpertyType();
+            default -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        };
 
         return responseEntity;
     }
