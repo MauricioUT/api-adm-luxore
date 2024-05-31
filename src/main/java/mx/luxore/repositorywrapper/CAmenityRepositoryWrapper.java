@@ -32,8 +32,7 @@ public class CAmenityRepositoryWrapper {
         return repository.findById(id);
     }
 
-    public Integer save(CAmenity amenity) {
+    public void save(CAmenity amenity) {
         this.repository.saveAndFlush(amenity);
-        return amenity.getId();
     }
 }

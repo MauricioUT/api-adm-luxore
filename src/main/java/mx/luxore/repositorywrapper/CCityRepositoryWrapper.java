@@ -1,7 +1,6 @@
 package mx.luxore.repositorywrapper;
 
 import mx.luxore.entity.CCity;
-import mx.luxore.entity.CColony;
 import mx.luxore.repository.CCityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -28,9 +27,8 @@ public class CCityRepositoryWrapper {
         return repository.findById(id);
     }
 
-    public Integer save(CCity city) {
+    public void save(CCity city) {
         this.repository.saveAndFlush(city);
-        return city.getId();
     }
 
 }

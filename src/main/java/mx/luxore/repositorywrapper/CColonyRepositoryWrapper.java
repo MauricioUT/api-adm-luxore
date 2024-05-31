@@ -28,9 +28,8 @@ public class CColonyRepositoryWrapper {
         return repository.countByIdCity_Id(idCity);
     }
 
-    public Integer save(CColony colony) {
+    public void save(CColony colony) {
         this.repository.saveAndFlush(colony);
-        return colony.getId();
     }
 
 }

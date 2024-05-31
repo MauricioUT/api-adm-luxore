@@ -91,4 +91,40 @@ public class CatalogsController {
     public ResponseEntity<?> addColony(@RequestBody ColonyDto colonyDto) {
         return catalogsService.addColony(colonyDto);
     }
+
+    @Operation(summary = "update amenity")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Server Error")  })
+    @PostMapping(value = "/updateAmenity", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateAmenity(@RequestBody CatalogDto amenity) {
+        return catalogsService.updateAmenity(amenity);
+    }
+
+    @Operation(summary = "update property type")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Server Error")  })
+    @PostMapping(value = "/updatePropertyType", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updatePropertyType(@RequestBody CatalogDto property) {
+        return catalogsService.updatePropertyType(property);
+    }
+
+    @Operation(summary = "update city")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Server Error")  })
+    @PostMapping(value = "/updateCity", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateCity(@RequestBody CityDto cityDto) {
+        return catalogsService.updateCity(cityDto);
+    }
+
+    @Operation(summary = "update colony")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Server Error")  })
+    @PostMapping(value = "/updateColony", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateColony(@RequestBody ColonyDto colonyDto) {
+        return catalogsService.updateColony(colonyDto);
+    }
 }

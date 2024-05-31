@@ -22,9 +22,8 @@ public class CPropertyTypeRepositoryWrapper {
         return repository.findById(id);
     }
 
-    public Integer save(CPropertyType propertyType) {
+    public void save(CPropertyType propertyType) {
         this.repository.saveAndFlush(propertyType);
-        return propertyType.getId();
     }
 
 }
