@@ -51,7 +51,7 @@ public class CatalogsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")  })
-    @GetMapping(value = "/cities/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/cities/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getColonyPageable(@PathVariable int id) {
         return catalogsService.getColonyById(id);
     }
