@@ -11,6 +11,7 @@ public interface CatalogsService {
     ResponseEntity<?> getCityPageable(CityDto state);
     ResponseEntity<?> getColonyPageable(ColonyDto city);
     ResponseEntity<?> getAmenityPageable(CatalogDto page);
+    ResponseEntity<?> getColonyById(int id);
 
     ResponseEntity<?> addAmenity(CatalogDto amenity);
     ResponseEntity<?> addCity(CityDto city);

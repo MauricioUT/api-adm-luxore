@@ -51,6 +51,15 @@ public class CatalogsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")  })
+    @GetMapping(value = "/cities/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getColonyPageable(@PathVariable int id) {
+        return catalogsService.getColonyById(id);
+    }
+
+    @Operation(summary = "get colonies by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Server Error")  })
     @PostMapping(value = "/colonies", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getColonyPageable(@RequestBody ColonyDto city) {
         return catalogsService.getColonyPageable(city);

@@ -108,6 +108,21 @@ public class CatalogsReadServiceImpl implements CatalogsService {
     }
 
     @Override
+    public ResponseEntity<?> getColonyById(int id) {
+        Optional<CColony> col = colonyRepositoryWrapper.findById(id);
+        if (col.isEmpty()) {
+            throw new ResourceNotFoundException("Colonia", " ", " ",
+                    new Throwable("getColonyById()"), this.getClass().getName());
+        }
+        ColonyDto colony = new ColonyDto();
+        colony.setId(col.get().getId());
+        colony.setDescription(col.get().getColony());
+        colony.setPostalCode(col.get().getPostalCode());
+        colony.setIdCity(col.get().getIdCity().getId());
+        return new ResponseEntity<>(colony, HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<?> addAmenity(CatalogDto amenity) {
         CAmenity am = new CAmenity();
         am.setAmenity(amenity.getDescription());
