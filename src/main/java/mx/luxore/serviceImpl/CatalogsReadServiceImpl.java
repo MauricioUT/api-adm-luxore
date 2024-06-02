@@ -92,7 +92,7 @@ public class CatalogsReadServiceImpl implements CatalogsService {
     }
 
     @Override
-    public ResponseEntity<?> getAmenityPageable(CatalogDto page) {
+    public ResponseEntity<?> getAmenityPageable(PageableDto page) {
         Pageable pageable = PageRequest.of(page.getPage(), page.getTotalPage());
         Page<CAmenity> amenities = amenityRepositoryWrapper.findAll(pageable);
         if (amenities.isEmpty())

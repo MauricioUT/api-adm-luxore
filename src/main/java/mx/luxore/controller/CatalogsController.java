@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import mx.luxore.dto.CatalogDto;
 import mx.luxore.dto.CityDto;
 import mx.luxore.dto.ColonyDto;
+import mx.luxore.dto.PageableDto;
 import mx.luxore.service.CatalogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,7 +35,7 @@ public class CatalogsController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")  })
     @PostMapping(value = "/amenities", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAmenitiesPageable(@RequestBody CatalogDto pageable) {
+    public ResponseEntity<?> getAmenitiesPageable(@RequestBody PageableDto pageable) {
         return catalogsService.getAmenityPageable(pageable);
     }
 

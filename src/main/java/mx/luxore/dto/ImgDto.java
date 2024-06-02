@@ -12,9 +12,9 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CityDto extends PageableDto implements Serializable {
+public class ImgDto extends IdDto implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 6886394635440354624L;
-    private int idState;
+    private static final long serialVersionUID = -4612439317658227580L;
+    private String imagePath;
 }

@@ -12,11 +12,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ColonyDto extends PageableDto implements Serializable {
-
+public class IdDto implements Serializable {
     @Serial
-    private static final long serialVersionUID = 4711647709622821400L;
-    private int idCity;
-    private String postalCode;
+    private static final long serialVersionUID = 1721248043303850637L;
 
+    private int id;
 }

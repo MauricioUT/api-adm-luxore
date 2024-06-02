@@ -11,12 +11,9 @@ import java.io.Serializable;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CatalogDto implements Serializable {
+public class CatalogDto extends IdDto implements Serializable {
 
     private static final long serialVersionUID = 2482656810658307877L;
 
-    private int id;
     private String description;
-    private int page;
-    private int totalPage;
 }

@@ -21,12 +21,12 @@ public class TAmenitiesProperty {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "idAmenity", nullable = false)
     private CAmenity idAmenity;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "idProperty", nullable = false)
     private TProperty idProperty;
 
