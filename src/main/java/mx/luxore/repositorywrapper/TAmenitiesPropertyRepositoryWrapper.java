@@ -14,17 +14,20 @@ public class TAmenitiesPropertyRepositoryWrapper {
     @Autowired
     private TAmenitiesPropertyRepository repository;
 
-    public List<TAmenitiesProperty> findAll() {
-        return repository.findAll();
+    public List<TAmenitiesProperty> findByIdProperty_Id(int id) {
+        return repository.findByIdProperty_Id(id);
     }
 
     public Optional<TAmenitiesProperty> findById(int id) {
         return repository.findById(id);
     }
 
-    public Integer save(TAmenitiesProperty amenitiesProperty) {
+    public void save(TAmenitiesProperty amenitiesProperty) {
         this.repository.saveAndFlush(amenitiesProperty);
-        return amenitiesProperty.getId();
+    }
+
+    public void delete(TAmenitiesProperty amenitiesProperty) {
+        this.repository.delete(amenitiesProperty);
     }
 
 }

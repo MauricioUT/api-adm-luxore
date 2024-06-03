@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CCategoryRepositoryWrapper {
 
     @Autowired
     private CCategoryRepository repository;
+
+    public Optional<CCategory> findById(Integer id) {
+        return repository.findById(id);
+    }
 
     public List<CCategory> findAll() {
         return repository.findAll();

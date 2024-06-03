@@ -31,7 +31,7 @@ public class TPropertyDto implements Serializable {
     private String title;
     private String description;
     private String addres;
-    private Byte garage;
+    private Boolean garage;
     private Integer carsNumber;
     private Integer rooms;
     private Integer bedrooms;
@@ -39,12 +39,12 @@ public class TPropertyDto implements Serializable {
     private Instant postedYear;
     private String metersSurface;
     private String metersBuilded;
-    private Byte featuredProperty;
+    private Boolean featuredProperty;
     private Instant updateOn;
     private String zip;
     private Integer floors;
     private String features;
-    private Byte enable;
+    private Boolean enable;
     private String latitude;
     private String longitude;
     private String pageAddress;

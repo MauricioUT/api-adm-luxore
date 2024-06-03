@@ -56,7 +56,7 @@ public class TProperty {
 
     @NotNull
     @Column(name = "garage", nullable = false)
-    private Byte garage;
+    private Boolean garage;
 
     @NotNull
     @Column(name = "carsNumber", nullable = false)
@@ -106,7 +106,7 @@ public class TProperty {
 
     @NotNull
     @Column(name = "featuredProperty", nullable = false)
-    private Byte featuredProperty;
+    private Boolean featuredProperty;
 
     @NotNull
     @Column(name = "updateOn", nullable = false)
@@ -133,7 +133,7 @@ public class TProperty {
 
     @NotNull
     @Column(name = "enable", nullable = false)
-    private Byte enable;
+    private Boolean enable;
 
     @Size(max = 100)
     @NotNull
