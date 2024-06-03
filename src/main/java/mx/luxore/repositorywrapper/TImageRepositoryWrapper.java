@@ -14,17 +14,15 @@ public class TImageRepositoryWrapper {
     @Autowired
     private TImageRepository repository;
 
-    public List<TImage> findAll() {
-        return repository.findAll();
-    }
-
     public Optional<TImage> findById(int id) {
         return repository.findById(id);
     }
 
-    public Integer save(TImage image) {
+    public void delete(TImage image) {
+        this.repository.delete(image);
+    }
+    public void save(TImage image) {
         this.repository.saveAndFlush(image);
-        return image.getId();
     }
 
 }

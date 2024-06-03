@@ -3,7 +3,6 @@ package mx.luxore.serviceImpl;
 import mx.luxore.dto.*;
 import mx.luxore.entity.*;
 import mx.luxore.exception.ResourceNotFoundException;
-import mx.luxore.repository.CAmenityRepository;
 import mx.luxore.repositorywrapper.*;
 import mx.luxore.service.PropertyService;
 import org.modelmapper.ModelMapper;
@@ -112,7 +111,9 @@ public class PropertyServiceImpl implements PropertyService {
         propertyDto.setAmenities(am);
         propertyDto.setImages(imgs);
 
-
+        ImgDto mainImg = new ImgDto();
+        mainImg.setImagePath(property.get().getMainImage());
+        propertyDto.setMainImage(mainImg);
         return new ResponseEntity<>(propertyDto, HttpStatus.OK);
     }
 
@@ -133,8 +134,11 @@ public class PropertyServiceImpl implements PropertyService {
         property.setIdState(state.get());
         property.setIdColony(colony.get());
         property.setIdCategory(category.get());
+        if (prop.getMainImage() != null)
+            property.setMainImage(prop.getMainImage().getImagePath());
+        else
+            System.out.println(" invocar metodo  que cree la imagen, guatde en googleStorage y db");
 
-        property.setMainImage(prop.getMainImage());
         property.setPrice(prop.getPrice());
         property.setTitle(prop.getTitle());
         property.setDescription(prop.getDescription());
@@ -161,7 +165,7 @@ public class PropertyServiceImpl implements PropertyService {
         property.setCredit(prop.getCredit());
         property.setSold(prop.getSold() != null ? prop.getSold() : false);
         property.setSlugTitle(prop.getSlugTitle());
-        property.setEnable(prop.getEnable() && !prop.getMainImage().isEmpty());
+        property.setEnable(prop.getEnable() && !prop.getMainImage().getImagePath().isEmpty());
 
         propertyRepositoryWrapper.save(property);
         updateAmenities(property, prop);
@@ -187,8 +191,11 @@ public class PropertyServiceImpl implements PropertyService {
         property.get().setIdState(state.get());
         property.get().setIdColony(colony.get());
         property.get().setIdCategory(category.get());
-
-        //property.get().setMainImage(prop.getMainImage());
+        //si se edita el main image hay que mandar un base 64 si no un null
+        if (prop.getMainImage() != null) {
+            System.out.println("llamar al metodo de resize, eliminar la imagen anterior y guardar la nueva y actualizar el path");
+            //property.get().setMainImage(prop.getMainImage());
+        }
         property.get().setPrice(prop.getPrice());
         property.get().setTitle(prop.getTitle());
         property.get().setDescription(prop.getDescription());

@@ -12,9 +12,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Setter
 @Getter
-public class IdDto implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1721248043303850637L;
+public class ImgReqDto extends ImgDto implements Serializable {
 
-    private Integer id;
+    @Serial
+    private static final long serialVersionUID = 646762761913947814L;
+
+    private String file;
 }

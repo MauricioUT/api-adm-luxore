@@ -23,7 +23,7 @@ public class TImage {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "idPrperties", nullable = false)
     private TProperty idPrperties;
 

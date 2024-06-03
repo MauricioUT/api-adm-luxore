@@ -32,4 +32,4 @@ logging:
       myapp:
         service: INFO
   file:
-    name: myapp.log
+    name: logs/luxore.log
