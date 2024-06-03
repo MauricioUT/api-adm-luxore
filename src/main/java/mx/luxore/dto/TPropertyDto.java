@@ -26,7 +26,7 @@ public class TPropertyDto implements Serializable {
     private static final long serialVersionUID = -5358941325821821380L;
 
     private Integer id;
-    private ImgDto mainImage;
+    private String mainImage;
     private BigDecimal price;
     private String title;
     private String description;

@@ -111,9 +111,7 @@ public class PropertyServiceImpl implements PropertyService {
         propertyDto.setAmenities(am);
         propertyDto.setImages(imgs);
 
-        ImgDto mainImg = new ImgDto();
-        mainImg.setImagePath(property.get().getMainImage());
-        propertyDto.setMainImage(mainImg);
+
         return new ResponseEntity<>(propertyDto, HttpStatus.OK);
     }
 
@@ -134,8 +132,8 @@ public class PropertyServiceImpl implements PropertyService {
         property.setIdState(state.get());
         property.setIdColony(colony.get());
         property.setIdCategory(category.get());
-        if (prop.getMainImage() != null)
-            property.setMainImage(prop.getMainImage().getImagePath());
+        if (!prop.getMainImage().isEmpty())
+            property.setMainImage(prop.getMainImage());
         else
             System.out.println(" invocar metodo  que cree la imagen, guatde en googleStorage y db");
 
@@ -165,7 +163,7 @@ public class PropertyServiceImpl implements PropertyService {
         property.setCredit(prop.getCredit());
         property.setSold(prop.getSold() != null ? prop.getSold() : false);
         property.setSlugTitle(prop.getSlugTitle());
-        property.setEnable(prop.getEnable() && !prop.getMainImage().getImagePath().isEmpty());
+        property.setEnable(prop.getEnable() && !prop.getMainImage().isEmpty());
 
         propertyRepositoryWrapper.save(property);
         updateAmenities(property, prop);
@@ -192,7 +190,7 @@ public class PropertyServiceImpl implements PropertyService {
         property.get().setIdColony(colony.get());
         property.get().setIdCategory(category.get());
         //si se edita el main image hay que mandar un base 64 si no un null
-        if (prop.getMainImage() != null) {
+        if (!property.get().getMainImage().isEmpty()) {
             System.out.println("llamar al metodo de resize, eliminar la imagen anterior y guardar la nueva y actualizar el path");
             //property.get().setMainImage(prop.getMainImage());
         }
