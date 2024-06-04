@@ -5,6 +5,10 @@ plugins {
     id 'war'
 }
 
+ext {
+    springCloudGcpVersion = "3.6.3"
+}
+
 group = 'mx.luxore'
 version = '1.0'
 
@@ -23,9 +27,16 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-ui:1.8.0'
     implementation 'org.springframework.boot:spring-boot-starter-parent:3.0.6'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'com.google.cloud:spring-cloud-gcp-starter-storage'
 
     implementation 'io.github.mojtabaj:c-webp:1.0.2'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "com.google.cloud:spring-cloud-gcp-dependencies:$springCloudGcpVersion"
+    }
 }
 

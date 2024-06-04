@@ -9,19 +9,24 @@ import mx.luxore.exception.ResourceNotFoundException;
 import mx.luxore.repositorywrapper.TImageRepositoryWrapper;
 import mx.luxore.repositorywrapper.TPropertyRepositoryWrapper;
 import mx.luxore.service.ImgService;
-import mx.luxore.utils.MagicImage;
+import mx.luxore.utils.CloudStorageUtils;
+import mx.luxore.utils.ImagesUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class ImgServiceImpl implements ImgService {
 
     @Autowired
@@ -30,42 +35,74 @@ public class ImgServiceImpl implements ImgService {
     @Autowired
     private TImageRepositoryWrapper imageRepositoryWrapper;
 
+    private static final String PATH = "src/main/resources/tmpImg/";
+
     @Override
     public ResponseEntity<?> updateImg(int id, List<ImgReqDto> img) throws IOException {
-        List<String> files = img.stream().map(ImgReqDto::getFile).collect(Collectors.toList());
-        File theDir = MagicImage.convertWebP(files, 700, 700);
-        MagicImage.dropDirectory(theDir);
+        String path = PATH + (new Date()).getTime() + "/";
         Optional<TProperty> property = propertyRepositoryWrapper.findById(id);
         if (property.isEmpty())
             throw new ResourceNotFoundException("Propiedades", " ", " ", new Throwable("updateImg()"), this.getClass().getName());
+        File theDir = new File(path);
+        boolean dirCreated = false;
+        if (!theDir.exists())
+            dirCreated = theDir.mkdirs();
 
-        img.forEach(i -> {
-            if (i.getId() != null) {
-                //edita una imagen existente
-                // resize
-                // se elimina en gstorage y se actualiza por la nueva
-                // se edita la imagen actual y gurda en db
-            } else {
-                //agrega una imagen nueva
-                //resize
-                //guardar en gstorage
-                //guardar path de gstorage
+        if (dirCreated) {
+            for (int i = 0; i < img.size(); i++) {
+                if (img.get(i).getId() != null && img.get(i).getId() != 0)
+                    newImage(img.get(i), path, img.get(i).getId().toString(), property.get(), false);
+                else
+                    newImage(img.get(i), path, String.valueOf(i + 1), property.get(), true);
             }
-        });
+        }
+        ImagesUtils.dropDirectory(theDir);
+
         return null;
     }
 
+    /**
+     * que pasa si genero una imagen nueva, siempre le pondrá el 1 de inicio hay que cambiar por el id de la db  en el nombre de url publica
+     *
+     * @param img
+     * @param path
+     * @param name
+     * @param property
+     * @param isNew
+     * @throws IOException
+     */
+    private void newImage(ImgReqDto img, String path, String name, TProperty property, boolean isNew) throws IOException {
+        String output = ImagesUtils.convertWebP(img.getFile(), path, name, 700, 700);
+        String fileName = "pruebaJAVA/" + property.getIdCategory().getCategory() + "/propiedad_" + property.getId() + "/" + name + ".webp";
+        String publicUrl = CloudStorageUtils.uploadFile(fileName, output);
+        if (isNew) {
+            TImage image = new TImage();
+            image.setIdPrperties(property);
+            image.setImagePath(publicUrl);
+            image.setCreatedOn(Instant.now());
+            imageRepositoryWrapper.save(image);
+        }
+    }
+
+
     @Override
-    public ResponseEntity<?> deleteImg(int id, ImgDto img) {
+    public ResponseEntity<?> deleteImg(int id, ImgDto img)  {
         Optional<TProperty> property = propertyRepositoryWrapper.findById(id);
+
         if (property.isEmpty())
             throw new ResourceNotFoundException("Propiedades", " ", " ", new Throwable("deleteImg()"), this.getClass().getName());
 
-        TImage image = property.get().getTImages().stream().filter((prop) -> prop.getId() == img.getId()).findAny().orElseThrow(() ->
+        TImage image = property.get().getTImages().stream().filter((prop) -> Objects.equals(prop.getId(), img.getId())).findAny().orElseThrow(() ->
                 new ResourceNotFoundException("Imagen", " ", " ", new Throwable("deleteImg()"), this.getClass().getName())
         );
 
-        // eliminar de google Storage
+        String fileName = "pruebaJAVA/" + property.get().getIdCategory().getCategory() + "/propiedad_" + property.get().getId() + "/" + image.getId() + ".webp";
+
+        try {
+            CloudStorageUtils.deleteFile(fileName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         imageRepositoryWrapper.delete(image);
 
         return new ResponseEntity<>(new DefaultMessage(img.getId().toString(), HttpStatus.OK.value()), HttpStatus.OK);
