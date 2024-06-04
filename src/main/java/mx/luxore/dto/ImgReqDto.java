@@ -18,4 +18,6 @@ public class ImgReqDto extends ImgDto implements Serializable {
     private static final long serialVersionUID = 646762761913947814L;
 
     private String file;
+
+    private boolean isMain;
 }

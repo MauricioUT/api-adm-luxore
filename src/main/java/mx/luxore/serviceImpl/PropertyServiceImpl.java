@@ -164,7 +164,6 @@ public class PropertyServiceImpl implements PropertyService {
         property.setSold(prop.getSold() != null ? prop.getSold() : false);
         property.setSlugTitle(prop.getSlugTitle());
         property.setEnable(prop.getEnable() && !prop.getMainImage().isEmpty());
-
         propertyRepositoryWrapper.save(property);
         updateAmenities(property, prop);
         propertyRepositoryWrapper.save(property);
