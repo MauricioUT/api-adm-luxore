@@ -128,6 +128,7 @@ public class PropertyServiceImpl implements PropertyService {
 
         TProperty property = new TProperty();
         property.setIdPropertyType(propertyType.get());
+        property.setMainImage("");
         property.setIdCity(city.get());
         property.setIdState(state.get());
         property.setIdColony(colony.get());
