@@ -132,11 +132,6 @@ public class PropertyServiceImpl implements PropertyService {
         property.setIdState(state.get());
         property.setIdColony(colony.get());
         property.setIdCategory(category.get());
-        if (!prop.getMainImage().isEmpty())
-            property.setMainImage(prop.getMainImage());
-        else
-            System.out.println(" invocar metodo  que cree la imagen, guatde en googleStorage y db");
-
         property.setPrice(prop.getPrice());
         property.setTitle(prop.getTitle());
         property.setDescription(prop.getDescription());
@@ -188,11 +183,6 @@ public class PropertyServiceImpl implements PropertyService {
         property.get().setIdState(state.get());
         property.get().setIdColony(colony.get());
         property.get().setIdCategory(category.get());
-        //si se edita el main image hay que mandar un base 64 si no un null
-        if (!property.get().getMainImage().isEmpty()) {
-            System.out.println("llamar al metodo de resize, eliminar la imagen anterior y guardar la nueva y actualizar el path");
-            //property.get().setMainImage(prop.getMainImage());
-        }
         property.get().setPrice(prop.getPrice());
         property.get().setTitle(prop.getTitle());
         property.get().setDescription(prop.getDescription());

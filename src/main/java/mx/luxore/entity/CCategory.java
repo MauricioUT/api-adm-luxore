@@ -37,6 +37,11 @@ public class CCategory {
     @Column(name = "ordering", nullable = false)
     private Integer ordering;
 
+    @Size(max = 45)
+    @NotNull
+    @Column(name = "shortName", nullable = false, length = 45)
+    private String shortName;
+
     @OneToMany(mappedBy = "idCategory")
     private Set<TProperty> tProperties = new LinkedHashSet<>();
 

@@ -51,42 +51,44 @@ public class ImgServiceImpl implements ImgService {
             dirCreated = theDir.mkdirs();
 
         if (dirCreated) {
-            for (int i = 0; i < img.size(); i++) {
-                if (img.get(i).isMain()) {
-                    if (!img.get(i).getImagePath().isBlank())
-                        newImage(img.get(i), path, "lista", property.get(), false, SIZE_MAIN, SIZE_MAIN);
+            for (ImgReqDto i : img) {
+                if (i.isMain()) {
+                    if (!i.getImagePath().isBlank())
+                        newImage(i, path, id + "_lista", property.get(), false, SIZE_MAIN, SIZE_MAIN);
                     else
-                        newImage(img.get(i), path, "lista", property.get(), true, SIZE_MAIN, SIZE_MAIN);
+                        newImage(i, path, id + "_lista", property.get(), true, SIZE_MAIN, SIZE_MAIN);
                 } else {
-                    if (img.get(i).getId() != null && img.get(i).getId() != 0 && !img.get(i).getImagePath().isBlank())
-                        newImage(img.get(i), path, img.get(i).getId().toString(), property.get(), false, SIZE, SIZE);
+                    if (i.getId() != null && i.getId() != 0 && !i.getImagePath().isBlank())
+                        newImage(i, path, i.getId().toString(), property.get(), false, SIZE, SIZE);
                     else
-                        newImage(img.get(i), path, String.valueOf(i + 1), property.get(), true, SIZE, SIZE);
+                        newImage(i, path, "", property.get(), true, SIZE, SIZE);
                 }
             }
         }
         ImagesUtils.dropDirectory(theDir);
 
-        return null;
+        return new ResponseEntity<>(new DefaultMessage(String.valueOf(id), HttpStatus.OK.value()), HttpStatus.OK);
     }
 
-    /**
-     * que pasa si genero una imagen nueva, siempre le pondrá el 1 de inicio hay que cambiar por el id de la db  en el nombre de url publica
-     **/
     protected void newImage(ImgReqDto img, String path, String name, TProperty property, boolean isNew, int width, int height) throws IOException {
-        String output = ImagesUtils.convertWebP(img.getFile(), path, name, width, height);
-        String fileName = "pruebaJAVA/" + property.getIdCategory().getCategory() + "/propiedad_" + property.getId() + "/" + name + ".webp";
-        String publicUrl = CloudStorageUtils.uploadFile(fileName, output);
+        TImage image = null;
         if (isNew && !img.isMain()) {
-            TImage image = new TImage();
+            image = new TImage();
             image.setIdPrperties(property);
-            image.setImagePath(publicUrl);
+            image.setImagePath("");
             image.setCreatedOn(Instant.now());
             imageRepositoryWrapper.save(image);
         }
+        String output = ImagesUtils.convertWebP(img.getFile(), path, name, width, height);
+        String fileName = "pruebaJAVA/" + property.getIdCategory().getShortName() + "/propiedad_" + property.getId() + "/" + (name.isEmpty() && image != null ? image.getId() : name) + ".webp";
+        String publicUrl = CloudStorageUtils.uploadFile(fileName, output);
         if (isNew && img.isMain()) {
             property.setMainImage(publicUrl);
             propertyRepositoryWrapper.save(property);
+        }
+        if (isNew && !img.isMain() && image != null) {
+            image.setImagePath(publicUrl);
+            imageRepositoryWrapper.save(image);
         }
 
     }
