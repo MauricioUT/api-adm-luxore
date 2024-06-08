@@ -84,6 +84,7 @@ public class ImgServiceImpl implements ImgService {
         String publicUrl = CloudStorageUtils.uploadFile(fileName, output);
         if (isNew && img.isMain()) {
             property.setMainImage(publicUrl);
+            property.setEnable(true);
             propertyRepositoryWrapper.save(property);
         }
         if (isNew && !img.isMain() && image != null) {

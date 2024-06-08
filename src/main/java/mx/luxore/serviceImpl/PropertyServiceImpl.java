@@ -141,7 +141,7 @@ public class PropertyServiceImpl implements PropertyService {
         property.setRooms(prop.getRooms());
         property.setBedrooms(prop.getBedrooms());
         property.setBathrooms(prop.getBathrooms());
-        property.setPostedYear(prop.getPostedYear());
+        property.setPostedYear(Instant.now());
         property.setMetersSurface(prop.getMetersSurface());
         property.setMetersBuilded(prop.getMetersBuilded());
         property.setFeaturedProperty(prop.getFeaturedProperty());
@@ -149,7 +149,6 @@ public class PropertyServiceImpl implements PropertyService {
         property.setZip(prop.getZip());
         property.setFloors(prop.getFloors());
         property.setFeatures(prop.getFeatures());
-        property.setFloors(prop.getFloors());
         property.setLatitude(prop.getLatitude());
         property.setLongitude(prop.getLongitude());
         property.setPageAddress(prop.getPageAddress());
@@ -158,7 +157,7 @@ public class PropertyServiceImpl implements PropertyService {
         property.setCredit(prop.getCredit());
         property.setSold(prop.getSold() != null ? prop.getSold() : false);
         property.setSlugTitle(prop.getSlugTitle());
-        property.setEnable(prop.getEnable() && !prop.getMainImage().isEmpty());
+        property.setEnable(prop.getEnable());
         propertyRepositoryWrapper.save(property);
         updateAmenities(property, prop);
         propertyRepositoryWrapper.save(property);
