@@ -35,7 +35,7 @@ public class ImagesController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")})
     @PutMapping(value = "/{idProperty}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> updateProperty(@PathVariable int idProperty, @RequestBody List<ImgReqDto> img) throws IOException {
+    public ResponseEntity<?> updateProperty(@PathVariable int idProperty, @RequestBody ImgReqDto img) throws IOException {
         return service.updateImg(idProperty, img);
     }
 }

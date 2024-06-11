@@ -40,7 +40,7 @@ public class ImgServiceImpl implements ImgService {
     private static final String PATH = "src/main/resources/tmpImg/";
 
     @Override
-    public ResponseEntity<?> updateImg(int id, List<ImgReqDto> img) throws IOException {
+    public ResponseEntity<?> updateImg(int id, ImgReqDto img) throws IOException {
         String path = PATH + (new Date()).getTime() + "/";
         Optional<TProperty> property = propertyRepositoryWrapper.findById(id);
         if (property.isEmpty())
@@ -51,18 +51,17 @@ public class ImgServiceImpl implements ImgService {
             dirCreated = theDir.mkdirs();
 
         if (dirCreated) {
-            for (ImgReqDto i : img) {
-                if (i.isMain()) {
-                    if (!i.getImagePath().isBlank())
-                        newImage(i, path, id + "_lista", property.get(), false, SIZE_MAIN, SIZE_MAIN);
-                    else
-                        newImage(i, path, id + "_lista", property.get(), true, SIZE_MAIN, SIZE_MAIN);
-                } else {
-                    if (i.getId() != null && i.getId() != 0 && !i.getImagePath().isBlank())
-                        newImage(i, path, i.getId().toString(), property.get(), false, SIZE, SIZE);
-                    else
-                        newImage(i, path, "", property.get(), true, SIZE, SIZE);
-                }
+            if (img.isMain()) {
+                if (!img.getImagePath().isBlank())
+                    newImage(img, path, id + "_lista", property.get(), false, SIZE_MAIN, SIZE_MAIN);
+                else
+                    newImage(img, path, id + "_lista", property.get(), true, SIZE_MAIN, SIZE_MAIN);
+            } else {
+                if (img.getId() != null && img.getId() != 0 && !img.getImagePath().isBlank())
+                    newImage(img, path, img.getId().toString(), property.get(), false, SIZE, SIZE);
+                else
+                    newImage(img, path, "", property.get(), true, SIZE, SIZE);
+
             }
         }
         ImagesUtils.dropDirectory(theDir);
@@ -78,9 +77,11 @@ public class ImgServiceImpl implements ImgService {
             image.setImagePath("");
             image.setCreatedOn(Instant.now());
             imageRepositoryWrapper.save(image);
+            name = image.getId().toString();
         }
+
         String output = ImagesUtils.convertWebP(img.getFile(), path, name, width, height);
-        String fileName = "pruebaJAVA/" + property.getIdCategory().getShortName() + "/propiedad_" + property.getId() + "/" + (name.isEmpty() && image != null ? image.getId() : name) + ".webp";
+        String fileName = "pruebaJAVA/" + property.getIdCategory().getShortName() + "/propiedad_" + property.getId() + "/" + name + ".webp";
         String publicUrl = CloudStorageUtils.uploadFile(fileName, output);
         if (isNew && img.isMain()) {
             property.setMainImage(publicUrl);

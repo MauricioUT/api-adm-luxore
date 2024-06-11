@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ImgService {
 
-    ResponseEntity<?> updateImg(int id, List<ImgReqDto> img) throws IOException;
+    ResponseEntity<?> updateImg(int id, ImgReqDto img) throws IOException;
 
     ResponseEntity<?> deleteImg(int id, ImgDto img);
 }
