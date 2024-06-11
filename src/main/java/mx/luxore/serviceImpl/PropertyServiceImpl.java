@@ -1,6 +1,5 @@
 package mx.luxore.serviceImpl;
 
-import com.google.common.util.concurrent.Striped;
 import mx.luxore.dto.*;
 import mx.luxore.entity.*;
 import mx.luxore.exception.ResourceNotFoundException;
@@ -60,7 +59,7 @@ public class PropertyServiceImpl implements PropertyService {
     public ResponseEntity<?> getProperties(PropertyReqDto request) {
         Pageable pag = PageRequest.of(request.getPage(), request.getTotalPage());
         List<TProperty> properties;
-        long size = 0;
+        long size;
         if (request.getIdCategory() > 0 && !request.getWildCard().isBlank()) {
             properties = propertyRepositoryWrapper.findByTitleLikeAndIdCategory_Id(pag, request.getWildCard(), request.getIdCategory());
             size = propertyRepositoryWrapper.countByTitleLikeAndIdCategory_Id(request.getWildCard(), request.getIdCategory());
@@ -233,9 +232,7 @@ public class PropertyServiceImpl implements PropertyService {
 
 
     public void updateAmenities(TProperty propsE, TPropertyDto prop) {
-        propsE.getTAmenitiesProperties().forEach(amp -> {
-            amenitiesPropertyRepositoryWrapper.delete(amp);
-        });
+        propsE.getTAmenitiesProperties().forEach(amp -> amenitiesPropertyRepositoryWrapper.delete(amp));
         Set<TAmenitiesProperty> amenitiesProperties = prop.getAmenities().stream().map(p -> {
             TAmenitiesProperty am = new TAmenitiesProperty();
             am.setIdProperty(propsE);
