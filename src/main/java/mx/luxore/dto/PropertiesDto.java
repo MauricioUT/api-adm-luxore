@@ -25,4 +25,5 @@ public class PropertiesDto implements Serializable {
     private boolean sold;
     private Instant postedYear;
     private BigDecimal price;
+    private String landingUrl;
 }

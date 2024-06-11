@@ -1,10 +1,12 @@
 package mx.luxore.serviceImpl;
 
+import com.google.common.util.concurrent.Striped;
 import mx.luxore.dto.*;
 import mx.luxore.entity.*;
 import mx.luxore.exception.ResourceNotFoundException;
 import mx.luxore.repositorywrapper.*;
 import mx.luxore.service.PropertyService;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,8 @@ public class PropertyServiceImpl implements PropertyService {
     @Autowired
     private CAmenityRepositoryWrapper amenityRepositoryWrapper;
 
+    private final static String LANDING_URL = "https://luxore.mx/";
+
     @Override
     public ResponseEntity<?> getProperties(PropertyReqDto request) {
         Pageable pag = PageRequest.of(request.getPage(), request.getTotalPage());
@@ -82,6 +86,7 @@ public class PropertyServiceImpl implements PropertyService {
             propertiesDto.setSold(p.getSold() != null && p.getSold());
             propertiesDto.setPostedYear(p.getPostedYear());
             propertiesDto.setPrice(p.getPrice());
+            propertiesDto.setLandingUrl(LANDING_URL + p.getIdCategory().getTag() + "/detalle/" + p.getId() + "/" + p.getSlugTitle());
             return propertiesDto;
         }).collect(Collectors.toList());
 
@@ -157,7 +162,7 @@ public class PropertyServiceImpl implements PropertyService {
         property.setNotes(prop.getNotes());
         property.setCredit(prop.getCredit());
         property.setSold(prop.getSold() != null ? prop.getSold() : false);
-        property.setSlugTitle(prop.getSlugTitle());
+        property.setSlugTitle(slugTitle(prop.getTitle()));
         property.setEnable(prop.getEnable());
         propertyRepositoryWrapper.save(property);
         updateAmenities(property, prop);
@@ -208,7 +213,7 @@ public class PropertyServiceImpl implements PropertyService {
         property.get().setNotes(prop.getNotes());
         property.get().setCredit(prop.getCredit());
         property.get().setSold(prop.getSold());
-        property.get().setSlugTitle(prop.getSlugTitle());
+        property.get().setSlugTitle(slugTitle(prop.getTitle()));
         property.get().setEnable(prop.getEnable());
         propertyRepositoryWrapper.save(property.get());
 
@@ -243,5 +248,15 @@ public class PropertyServiceImpl implements PropertyService {
         }).collect(Collectors.toSet());
 
         propsE.setTAmenitiesProperties(amenitiesProperties);
+    }
+
+    private String slugTitle(String title) {
+        String stripAccents = StringUtils.stripAccents(title.trim().toLowerCase()).replaceAll("[^A-Za-z0-9]", "-").
+                replaceAll("----", "-").replaceAll("---", "-")
+                .replaceAll("--", "-");
+        if (stripAccents.endsWith("-"))
+            stripAccents = stripAccents.substring(0, stripAccents.length() - 1);
+
+        return stripAccents;
     }
 }

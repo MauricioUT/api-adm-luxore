@@ -28,6 +28,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-parent:3.0.6'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'com.google.cloud:spring-cloud-gcp-starter-storage'
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
 
     implementation 'io.github.mojtabaj:c-webp:1.0.2'
     compileOnly 'org.projectlombok:lombok'
