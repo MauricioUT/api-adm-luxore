@@ -25,17 +25,17 @@ public class ImagesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")})
-    @DeleteMapping(value = "/{idPrperty}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteProperty(@PathVariable int idPrperty, @RequestBody ImgDto img) {
-        return service.deleteImg(idPrperty, img);
+    @DeleteMapping(value = "/{idProperty}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteProperty(@PathVariable int idProperty, @RequestBody ImgDto img) {
+        return service.deleteImg(idProperty, img);
     }
 
     @Operation(summary = "update property")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")})
-    @PutMapping(value = "/{idPrperty}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> updateProperty(@PathVariable int idPrperty, @RequestBody List<ImgReqDto> img) throws IOException {
-        return service.updateImg(idPrperty, img);
+    @PutMapping(value = "/{idProperty}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateProperty(@PathVariable int idProperty, @RequestBody List<ImgReqDto> img) throws IOException {
+        return service.updateImg(idProperty, img);
     }
 }
