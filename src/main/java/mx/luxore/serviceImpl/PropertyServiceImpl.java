@@ -55,6 +55,12 @@ public class PropertyServiceImpl implements PropertyService {
 
     private final static String LANDING_URL = "https://luxore.mx/";
 
+    private Optional<CPropertyType> propertyType;
+    private Optional<CCity> city;
+    private Optional<CState> state;
+    private Optional<CColony> colony;
+    private Optional<CCategory> category;
+
     @Override
     public ResponseEntity<?> getProperties(PropertyReqDto request) {
         Pageable pag = PageRequest.of(request.getPage(), request.getTotalPage());
@@ -119,14 +125,17 @@ public class PropertyServiceImpl implements PropertyService {
         return new ResponseEntity<>(propertyDto, HttpStatus.OK);
     }
 
+    private void getEntities(TPropertyDto prop) {
+        propertyType = propertyTypeRepositoryWrapper.findById(prop.getIdPropertyType().getId());
+        city = cityRepositoryWrapper.findById(prop.getIdCity().getId());
+        state = stateRepositoryWrapper.findById(prop.getIdState().getId());
+        colony = colonyRepositoryWrapper.findById(prop.getIdColony().getId());
+        category = categoryRepositoryWrapper.findById(prop.getIdCategory().getId());
+    }
+
     @Override
     public ResponseEntity<?> saveProperty(TPropertyDto prop) {
-        Optional<CPropertyType> propertyType = propertyTypeRepositoryWrapper.findById(prop.getIdPropertyType().getId());
-        Optional<CCity> city = cityRepositoryWrapper.findById(prop.getIdCity().getId());
-        Optional<CState> state = stateRepositoryWrapper.findById(prop.getIdState().getId());
-        Optional<CColony> colony = colonyRepositoryWrapper.findById(prop.getIdColony().getId());
-        Optional<CCategory> category = categoryRepositoryWrapper.findById(prop.getIdCategory().getId());
-
+        getEntities(prop);
         if (propertyType.isEmpty() || city.isEmpty() || state.isEmpty() || colony.isEmpty() || category.isEmpty())
             throw new ResourceNotFoundException("propertyType", " ", " ", new Throwable("updateProperty()"), this.getClass().getName());
 
@@ -172,11 +181,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public ResponseEntity<?> updateProperty(TPropertyDto prop) {
         Optional<TProperty> property = propertyRepositoryWrapper.findById(prop.getId());
-        Optional<CPropertyType> propertyType = propertyTypeRepositoryWrapper.findById(prop.getIdPropertyType().getId());
-        Optional<CCity> city = cityRepositoryWrapper.findById(prop.getIdCity().getId());
-        Optional<CState> state = stateRepositoryWrapper.findById(prop.getIdState().getId());
-        Optional<CColony> colony = colonyRepositoryWrapper.findById(prop.getIdColony().getId());
-        Optional<CCategory> category = categoryRepositoryWrapper.findById(prop.getIdCategory().getId());
+        getEntities(prop);
 
         if (property.isEmpty() || propertyType.isEmpty() || city.isEmpty() || state.isEmpty() || colony.isEmpty() || category.isEmpty())
             throw new ResourceNotFoundException("propertyType", " ", " ", new Throwable("updateProperty()"), this.getClass().getName());
