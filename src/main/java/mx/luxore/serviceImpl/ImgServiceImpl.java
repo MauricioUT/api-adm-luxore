@@ -21,7 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -49,27 +48,27 @@ public class ImgServiceImpl implements ImgService {
         boolean dirCreated = false;
         if (!theDir.exists())
             dirCreated = theDir.mkdirs();
-
+        int result = 0;
         if (dirCreated) {
             if (img.isMain()) {
                 if (!img.getImagePath().isBlank())
-                    newImage(img, path, id + "_lista", property.get(), false, SIZE_MAIN, SIZE_MAIN);
+                    result = newImage(img, path, id + "_lista", property.get(), false, SIZE_MAIN, SIZE_MAIN);
                 else
-                    newImage(img, path, id + "_lista", property.get(), true, SIZE_MAIN, SIZE_MAIN);
+                    result = newImage(img, path, id + "_lista", property.get(), true, SIZE_MAIN, SIZE_MAIN);
             } else {
                 if (img.getId() != null && img.getId() != 0 && !img.getImagePath().isBlank())
-                    newImage(img, path, img.getId().toString(), property.get(), false, SIZE, SIZE);
+                    result = newImage(img, path, img.getId().toString(), property.get(), false, SIZE, SIZE);
                 else
-                    newImage(img, path, "", property.get(), true, SIZE, SIZE);
+                    result = newImage(img, path, "", property.get(), true, SIZE, SIZE);
 
             }
         }
         ImagesUtils.dropDirectory(theDir);
 
-        return new ResponseEntity<>(new DefaultMessage(String.valueOf(id), HttpStatus.OK.value()), HttpStatus.OK);
+        return new ResponseEntity<>(new DefaultMessage(String.valueOf(result), HttpStatus.OK.value()), HttpStatus.OK);
     }
 
-    protected void newImage(ImgReqDto img, String path, String name, TProperty property, boolean isNew, int width, int height) throws IOException {
+    protected int newImage(ImgReqDto img, String path, String name, TProperty property, boolean isNew, int width, int height) throws IOException {
         TImage image = null;
         if (isNew && !img.isMain()) {
             image = new TImage();
@@ -93,6 +92,12 @@ public class ImgServiceImpl implements ImgService {
             imageRepositoryWrapper.save(image);
         }
 
+        if (img.getId() == 0) {
+            assert image != null;
+            return image.getId();
+        } else {
+            return img.getId();
+        }
     }
 
 
@@ -107,7 +112,7 @@ public class ImgServiceImpl implements ImgService {
                 new ResourceNotFoundException("Imagen", " ", " ", new Throwable("deleteImg()"), this.getClass().getName())
         );
 
-        String fileName = "pruebaJAVA/" + property.get().getIdCategory().getCategory() + "/propiedad_" + property.get().getId() + "/" + image.getId() + ".webp";
+        String fileName = "pruebaJAVA/" + property.get().getIdCategory().getShortName() + "/propiedad_" + property.get().getId() + "/" + image.getId() + ".webp";
 
         try {
             CloudStorageUtils.deleteFile(fileName);

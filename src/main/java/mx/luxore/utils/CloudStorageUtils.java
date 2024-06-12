@@ -27,15 +27,13 @@ public class CloudStorageUtils {
     /**
      * credentials.json will be created from new account service  with Operador de Cloud Storage para copias de seguridad y DR role
      *
-     * @param fileName
-     * @param filePath
-     * @throws IOException
      */
     public static String uploadFile(String fileName, String filePath) throws IOException {
         GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(CREDENTIALS_FILE_PATH));
         Storage storage = StorageOptions.newBuilder()
                 .setProjectId(PROYECT_ID)
-                .setCredentials(credentials).build().getService();
+                .setCredentials(credentials)
+                .build().getService();
 
         BlobId blobId = BlobId.of(BUCKET, fileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
@@ -58,7 +56,8 @@ public class CloudStorageUtils {
         BlobId blobId = BlobId.of(BUCKET, objectName);
         Storage storage = StorageOptions.newBuilder()
                 .setProjectId(PROYECT_ID)
-                .setCredentials(credentials).build().getService();
+                .setCredentials(credentials)
+                .build().getService();
         boolean deleted = storage.delete(blobId);
 
         if (deleted) {
