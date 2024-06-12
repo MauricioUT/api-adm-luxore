@@ -96,12 +96,13 @@ public class ImgServiceImpl implements ImgService {
             imageRepositoryWrapper.save(image);
         }
 
-        if (img.getId() == 0) {
+        if (isNew && !img.isMain()) {
             assert image != null;
             return new DefaultMessage(publicUrl, image.getId());
-        } else {
+        } else if (!img.isMain()) {
             return new DefaultMessage(publicUrl, img.getId());
-        }
+        } else
+            return new DefaultMessage(publicUrl, property.getId());
     }
 
 
