@@ -16,7 +16,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-    show-sql: true
+    show-sql: false
 name: luxore-test
 environment: testing
 enabled: false
@@ -28,6 +28,11 @@ logging:
     org:
       springframework:
         web: DEBUG
+        boot:
+          autoconfigure:
+            security:
+              servlet:
+                UserDetailsServiceAutoConfiguration: OFF
     com:
       myapp:
         service: INFO

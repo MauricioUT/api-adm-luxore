@@ -51,7 +51,7 @@ public class ImgServiceImpl implements ImgService {
         boolean dirCreated = false;
         if (!theDir.exists())
             dirCreated = theDir.mkdirs();
-        int result = 0;
+        DefaultMessage result = null;
         if (dirCreated) {
             if (img.isMain()) {
                 if (!img.getImagePath().isBlank())
@@ -68,10 +68,10 @@ public class ImgServiceImpl implements ImgService {
         }
         ImagesUtils.dropDirectory(theDir);
 
-        return new ResponseEntity<>(new DefaultMessage(String.valueOf(result), HttpStatus.OK.value()), HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    protected int newImage(ImgReqDto img, String path, String name, TProperty property, boolean isNew, int width, int height) throws IOException {
+    protected DefaultMessage newImage(ImgReqDto img, String path, String name, TProperty property, boolean isNew, int width, int height) throws IOException {
         TImage image = null;
         if (isNew && !img.isMain()) {
             image = new TImage();
@@ -97,9 +97,9 @@ public class ImgServiceImpl implements ImgService {
 
         if (img.getId() == 0) {
             assert image != null;
-            return image.getId();
+            return new DefaultMessage(publicUrl, image.getId());
         } else {
-            return img.getId();
+            return new DefaultMessage(publicUrl, img.getId());
         }
     }
 

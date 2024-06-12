@@ -27,6 +27,11 @@ logging:
     org:
       springframework:
         web: DEBUG
+        boot:
+          autoconfigure:
+            security:
+              servlet:
+                UserDetailsServiceAutoConfiguration: OFF
     com:
       myapp:
         service: INFO
