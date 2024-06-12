@@ -21,7 +21,7 @@ public class ImagesController {
     @Autowired
     private ImgService service;
 
-    @Operation(summary = "delete property")
+    @Operation(summary = "delete images")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")})
@@ -30,7 +30,16 @@ public class ImagesController {
         return service.deleteImg(idProperty, img);
     }
 
-    @Operation(summary = "update property")
+    @Operation(summary = "delete main image")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Server Error")})
+    @DeleteMapping(value = "/{idProperty}/main", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteMainImg(@PathVariable int idProperty) {
+        return service.deleteMainImg(idProperty);
+    }
+
+    @Operation(summary = "update or add images")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")})
@@ -38,4 +47,5 @@ public class ImagesController {
     public ResponseEntity<?> updateProperty(@PathVariable int idProperty, @RequestBody ImgReqDto img) throws IOException {
         return service.updateImg(idProperty, img);
     }
+
 }

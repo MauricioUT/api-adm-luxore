@@ -12,4 +12,6 @@ public interface ImgService {
     ResponseEntity<?> updateImg(int id, ImgReqDto img) throws IOException;
 
     ResponseEntity<?> deleteImg(int id, ImgDto img);
+
+    ResponseEntity<?> deleteMainImg(int id);
 }
