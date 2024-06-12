@@ -5,7 +5,6 @@ import mx.luxore.repository.TImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +21,7 @@ public class TImageRepositoryWrapper {
         this.repository.delete(image);
     }
     public void save(TImage image) {
-        this.repository.saveAndFlush(image);
+        this.repository.save(image);
     }
 
 }

@@ -16,7 +16,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-    show-sql: true
+    show-sql: false
 name: luxore-prod
 environment: production
 enabled: true
@@ -32,3 +32,5 @@ logging:
         service: INFO
   file:
     name: logs/luxore.log
+credentials:
+  path: /credentials.json

@@ -8,28 +8,33 @@ import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 
 @Slf4j
-@Component
+@Transactional
+@Service
 public class CloudStorageUtils {
 
     private final static String PROYECT_ID = "luxore-1";
     private final static String BUCKET = "luxore-img";
-    private static final String CREDENTIALS_FILE_PATH = "src/main/resources/credentials.json";
     private static final String CONTENT_TYPE = "image/webp"; // Replace with appropriate content type
     private static final String GOOGLE_CLOUD_STORAGE_URL = "https://storage.googleapis.com/";
 
+    @Value("${credentials.path}")
+    private String CREDENTIALS_FILE_PATH;
+
     /**
      * credentials.json will be created from new account service  with Operador de Cloud Storage para copias de seguridad y DR role
-     *
      */
-    public static String uploadFile(String fileName, String filePath) throws IOException {
-        GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(CREDENTIALS_FILE_PATH));
+    public String uploadFile(String fileName, String filePath) throws IOException {
+        GoogleCredentials credentials = GoogleCredentials.fromStream(Objects.requireNonNull(CloudStorageUtils.class.getResourceAsStream(CREDENTIALS_FILE_PATH)));
         Storage storage = StorageOptions.newBuilder()
                 .setProjectId(PROYECT_ID)
                 .setCredentials(credentials)
@@ -50,8 +55,8 @@ public class CloudStorageUtils {
     }
 
 
-    public static void deleteFile(String objectName) throws IOException {
-        GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream(CREDENTIALS_FILE_PATH));
+    public void deleteFile(String objectName) throws IOException {
+        GoogleCredentials credentials = GoogleCredentials.fromStream(Objects.requireNonNull(CloudStorageUtils.class.getResourceAsStream(CREDENTIALS_FILE_PATH)));
 
         BlobId blobId = BlobId.of(BUCKET, objectName);
         Storage storage = StorageOptions.newBuilder()

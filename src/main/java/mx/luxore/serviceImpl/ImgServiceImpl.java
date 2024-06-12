@@ -34,6 +34,9 @@ public class ImgServiceImpl implements ImgService {
     @Autowired
     private TImageRepositoryWrapper imageRepositoryWrapper;
 
+    @Autowired
+    private CloudStorageUtils cloudStorageUtils;
+
     private static final int SIZE_MAIN = 220;
     private static final int SIZE = 700;
     private static final String PATH = "src/main/resources/tmpImg/";
@@ -81,7 +84,7 @@ public class ImgServiceImpl implements ImgService {
 
         String output = ImagesUtils.convertWebP(img.getFile(), path, name, width, height);
         String fileName = "pruebaJAVA/" + property.getIdCategory().getShortName() + "/propiedad_" + property.getId() + "/" + name + ".webp";
-        String publicUrl = CloudStorageUtils.uploadFile(fileName, output);
+        String publicUrl = cloudStorageUtils.uploadFile(fileName, output);
         if (isNew && img.isMain()) {
             property.setMainImage(publicUrl);
             property.setEnable(true);
@@ -115,7 +118,7 @@ public class ImgServiceImpl implements ImgService {
         String fileName = "pruebaJAVA/" + property.get().getIdCategory().getShortName() + "/propiedad_" + property.get().getId() + "/" + image.getId() + ".webp";
 
         try {
-            CloudStorageUtils.deleteFile(fileName);
+            cloudStorageUtils.deleteFile(fileName);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

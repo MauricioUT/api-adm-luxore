@@ -1,4 +1,8 @@
-FROM  openjdk:15
+FROM  jcxldn/openjdk-alpine:15-jdk
+RUN apk update && \
+    apk upgrade -U && \
+    apk add ca-certificates ffmpeg libwebp libwebp-tools && \
+    rm -rf /var/cache/*
 RUN mkdir -p /app/
 ADD /build/libs/api-adm-luxore-1.0.jar /app/api-adm-luxore-1.0.jar
 RUN mkdir -p /keys/

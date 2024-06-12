@@ -33,3 +33,5 @@ logging:
         service: INFO
   file:
     name: logs/luxore.log
+credentials:
+  path: /credentials.json
