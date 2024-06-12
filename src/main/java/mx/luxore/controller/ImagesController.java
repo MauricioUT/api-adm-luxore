@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/images")
@@ -34,7 +33,7 @@ public class ImagesController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server Error")})
-    @DeleteMapping(value = "/{idProperty}/main", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{idProperty}/main", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteMainImg(@PathVariable int idProperty) {
         return service.deleteMainImg(idProperty);
     }
