@@ -32,7 +32,7 @@ logging:
           autoconfigure:
             security:
               servlet:
-                UserDetailsServiceAutoConfiguration: OFF
+                UserDetailsServiceAutoConfiguration:
     com:
       myapp:
         service: INFO
