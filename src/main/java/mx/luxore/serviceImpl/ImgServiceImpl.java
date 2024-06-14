@@ -84,7 +84,7 @@ public class ImgServiceImpl implements ImgService {
         }
 
         String output = ImagesUtils.convertWebP(img.getFile(), path, name, width, height);
-        String fileName = "pruebaJAVA/" + property.getIdCategory().getShortName() + "/propiedad_" + property.getId() + "/" + name + ".webp";
+        String fileName = property.getIdCategory().getShortName() + "/propiedad_" + property.getId() + "/" + name + ".webp";
         String publicUrl = cloudStorageUtils.uploadFile(fileName, output);
         if (isNew && img.isMain()) {
             property.setMainImage(publicUrl);
@@ -117,8 +117,8 @@ public class ImgServiceImpl implements ImgService {
                 new ResourceNotFoundException("Imagen", " ", " ", new Throwable("deleteImg()"), this.getClass().getName())
         );
 
-        String fileName = "pruebaJAVA/" + property.get().getIdCategory().getShortName() + "/propiedad_" + property.get().getId() + "/" + image.getId() + ".webp";
-
+        //String fileName = "pruebaJAVA/" + property.get().getIdCategory().getShortName() + "/propiedad_" + property.get().getId() + "/" + image.getId() + ".webp";
+        String fileName =  img.getImagePath();
         try {
             cloudStorageUtils.deleteFile(fileName);
         } catch (IOException e) {
