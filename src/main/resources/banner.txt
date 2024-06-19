@@ -5,3 +5,4 @@
 `-----' `-----' '--'   '--'`-----' `--' '--'`------'
 ${application.title} ${application.version}
 Powered by Spring Boot ${spring-boot.version}
+created by https://devops.datenkollektiv.de/banner.txt/index.html
