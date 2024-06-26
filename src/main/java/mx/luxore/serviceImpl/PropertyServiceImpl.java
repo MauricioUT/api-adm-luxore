@@ -91,6 +91,8 @@ public class PropertyServiceImpl implements PropertyService {
             propertiesDto.setSold(p.getSold() != null && p.getSold());
             propertiesDto.setPostedYear(p.getPostedYear());
             propertiesDto.setPrice(p.getPrice());
+            propertiesDto.setDescription(p.getDescription());
+            propertiesDto.setAddres(p.getAddres());
             propertiesDto.setLandingUrl(LANDING_URL + p.getIdCategory().getTag() + "/detalle/" + p.getId() + "/" + p.getSlugTitle());
             return propertiesDto;
         }).collect(Collectors.toList());
