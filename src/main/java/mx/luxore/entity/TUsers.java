@@ -32,7 +32,7 @@ public class TUsers {
 
     @NotNull
     @NotBlank
-    @Column(name = "password", nullable = false, length = 100)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Email
@@ -41,6 +41,10 @@ public class TUsers {
     @Size(max = 100)
     @Column(name = "email", nullable = false, length = 100)
     private String email;
+
+    @NotNull
+    @Column(name = "enable", nullable = false)
+    private Boolean enable;
 
     @OneToMany(mappedBy = "idUser")
     private Set<TUserRoles> tUserRoles = new LinkedHashSet<>();
