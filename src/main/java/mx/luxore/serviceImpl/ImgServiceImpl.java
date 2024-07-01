@@ -84,7 +84,13 @@ public class ImgServiceImpl implements ImgService {
         }
 
         String output = ImagesUtils.convertWebP(img.getFile(), path, name, width, height);
-        String fileName = property.getIdCategory().getShortName() + "/propiedad_" + property.getId() + "/" + name + ".webp";
+        String fileName = "";
+        if(isNew){
+            fileName = property.getIdCategory().getShortName() + "/propiedad_" + property.getId() + "/" + name + ".webp";
+        }else{
+            fileName =  img.getImagePath().replace("https://storage.googleapis.com/luxore-img/", "");
+        }
+       
         String publicUrl = cloudStorageUtils.uploadFile(fileName, output);
         if (isNew && img.isMain()) {
             property.setMainImage(publicUrl);
@@ -118,7 +124,7 @@ public class ImgServiceImpl implements ImgService {
         );
 
         //String fileName = "pruebaJAVA/" + property.get().getIdCategory().getShortName() + "/propiedad_" + property.get().getId() + "/" + image.getId() + ".webp";
-        String fileName =  img.getImagePath();
+        String fileName =  img.getImagePath().replace("https://storage.googleapis.com/luxore-img/", "");
         try {
             cloudStorageUtils.deleteFile(fileName);
         } catch (IOException e) {
@@ -135,8 +141,9 @@ public class ImgServiceImpl implements ImgService {
 
         if (property.isEmpty())
             throw new ResourceNotFoundException("Propiedades", " ", " ", new Throwable("deleteImg()"), this.getClass().getName());
-
-        String fileName = "pruebaJAVA/" + property.get().getIdCategory().getShortName() + "/propiedad_" + property.get().getId() + "/" + id + NAME_MAIN_IMAGE + ".webp";
+        //https://storage.googleapis.com/luxore-img
+        //String fileName =  property.get().getIdCategory().getShortName() + "/propiedad_" + property.get().getId() + "/" + id + NAME_MAIN_IMAGE + ".webp";
+        String fileName =  property.get().getMainImage().replace("https://storage.googleapis.com/luxore-img/", "");
 
         try {
             cloudStorageUtils.deleteFile(fileName);
