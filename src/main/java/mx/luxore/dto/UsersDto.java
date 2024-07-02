@@ -13,6 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
+@Builder
 public class UsersDto implements Serializable {
     @Serial
     private static final long serialVersionUID = 8207974166093264768L;
@@ -22,5 +23,5 @@ public class UsersDto implements Serializable {
     private String password;
     private String email;
     private Boolean enable;
-    private Set<String> roles;
+    private Set<Object> role;
 }

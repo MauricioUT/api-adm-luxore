@@ -4,10 +4,13 @@ import mx.luxore.entity.TUserRoles;
 import mx.luxore.repository.TUserRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
+@Transactional
 public class TUsersRolesRepositoryWrapper {
 
     @Autowired
@@ -19,5 +22,13 @@ public class TUsersRolesRepositoryWrapper {
 
     public void save(TUserRoles ur) {
         this.repository.saveAndFlush(ur);
+    }
+
+    public void saveAll(Set<TUserRoles> urs) {
+        this.repository.saveAll(urs);
+    }
+
+    public void delete(Set<TUserRoles> urs) {
+        this.repository.deleteAll(urs);
     }
 }

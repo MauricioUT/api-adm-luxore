@@ -25,4 +25,8 @@ public class CRolesRepositoryWrapper {
     public void save(CRoles roles) {
         this.repository.saveAndFlush(roles);
     }
+
+    public Optional<CRoles> findByName(String name) {
+        return repository.findByName(name);
+    }
 }
