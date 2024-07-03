@@ -41,3 +41,8 @@ logging:
     name: logs/luxore.log
 credentials:
   path: /credentials.json
+jwt:
+  secret:
+    key : ocLNiA6ay45a7VrcKNg6ap66ZyoKQqd6
+  time:
+    expiration: 86400000
