@@ -21,7 +21,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)// habilita las anotaciones de spring security en los controladores
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
     @Autowired
@@ -33,47 +33,27 @@ public class SecurityConfiguration {
     @Autowired
     private JWTAuthorizationFilter authorizationFilter;
 
-    /**
-     * objeto que controla el acceso a los endpoints
-     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(jwtUtils);
         jwtAuthenticationFilter.setAuthenticationManager(authenticationManager);
-        jwtAuthenticationFilter.setFilterProcessesUrl("/login");// si puede cambiar por lo que uno quiera
+        jwtAuthenticationFilter.setFilterProcessesUrl("/login");
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(
                             new AntPathRequestMatcher("/swagger-ui/**"),
+                            new AntPathRequestMatcher("/login"),
                             new AntPathRequestMatcher("/v3/api-docs/**")).permitAll();
-                    //auth.requestMatchers(new AntPathRequestMatcher("/api/catalogs/**")).hasRole("ADMIN");
                     auth.anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilter(jwtAuthenticationFilter) // filtro para autenticar el usuario y password
-                .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class) // filtro para obtenrr el token
+                .addFilter(jwtAuthenticationFilter)
+                .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
 
     }
 
-    /**
-     * create user in memory
-     */
-   /* @Bean
-    UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("Mauricio")
-                .password("1234")
-                .roles()
-                .build());
-        return manager;
-    }*/
-
-
-    /**
-     * objeto que se encarga de la administracion de lo autenticacion de los usuarios
-     */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception {
         return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
@@ -83,9 +63,6 @@ public class SecurityConfiguration {
                 .build();
     }
 
-    /**
-     * objeto que nos ayuda a encriptar las contraseñas
-     */
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
