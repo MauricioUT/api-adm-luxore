@@ -5,7 +5,7 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    url: jdbc:mysql://34.135.176.175:3306/luxore
+    url: jdbc:mysql://34.44.19.26:3306/luxore
     username: root
     password: lUx20230849
     driver-class-name: com.mysql.cj.jdbc.Driver

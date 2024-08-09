@@ -22,7 +22,7 @@ import java.util.Objects;
 @Service
 public class CloudStorageUtils {
 
-    private final static String PROYECT_ID = "luxore-1";
+    private final static String PROYECT_ID = "luxore-2";
     private final static String BUCKET = "luxore-img";
     private static final String CONTENT_TYPE = "image/webp"; // Replace with appropriate content type
     private static final String GOOGLE_CLOUD_STORAGE_URL = "https://storage.googleapis.com/";
