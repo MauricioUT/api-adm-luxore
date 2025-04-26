@@ -27,7 +27,9 @@ public class SecurityConfiguration {
         List<String> allowDomains = new ArrayList<>();
         allowDomains.add("http://localhost:4200");
         allowDomains.add("http://localhost:8080");
-        allowDomains.add("https://luxore-1.uc.r.appspot.com");
+        allowDomains.add("http://145.223.126.133:8080");
+        allowDomains.add("http://mantenimiento.luxore.mx");
+        allowDomains.add("https://mantenimiento.luxore.mx");
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("*"));

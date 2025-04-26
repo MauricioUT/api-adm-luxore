@@ -7,6 +7,6 @@ RUN mkdir -p /app/
 ADD /build/libs/api-adm-luxore-1.0.jar /app/api-adm-luxore-1.0.jar
 RUN mkdir -p /keys/
 ADD src/main/resources/credentials.json /tokens/credentials.json
-ENV GOOGLE_APPLICATION_CREDENTIALS /tokens/credentials.json
+ENV GOOGLE_APPLICATION_CREDENTIALS=/tokens/credentials.json
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app/api-adm-luxore-1.0.jar"]

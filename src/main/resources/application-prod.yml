@@ -5,9 +5,9 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    url: jdbc:mysql://34.44.19.26:3306/luxore
-    username: root
-    password: lUx20230849
+    url: jdbc:mysql://145.223.126.133:3306/luxore
+    username: luxoreuser
+    password: MY$QL2023
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
